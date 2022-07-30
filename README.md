@@ -3,6 +3,10 @@
 
 后台界面体验账号：admin  密码：macro123
 
+本项目接口：[https://github.com/wuhonghui123/AdminSpringboot](https://github.com/wuhonghui123/AdminSpringboot)
+
+小程序接口：[https://github.com/wuhonghui123/weappSpringboot](https://github.com/wuhonghui123/weappSpringboot)
+
 # vueweapp
 
 ## Project setup
