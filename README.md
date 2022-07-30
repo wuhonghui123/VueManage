@@ -1,3 +1,8 @@
+### 参考
+后台界面在线演示地址：[http://www.macrozheng.com/admin/](http://www.macrozheng.com/admin/)
+
+后台界面体验账号：admin  密码：macro123
+
 # vueweapp
 
 ## Project setup

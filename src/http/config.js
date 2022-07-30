@@ -1,0 +1,7 @@
+export default {
+    baseUrl: 'http://localhost:8092',
+    timeOut: 5000,
+    headers: {
+        'Content-Type': 'application/json;charset=UTF-8'
+    }
+}
