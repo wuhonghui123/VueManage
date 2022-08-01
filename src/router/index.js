@@ -13,6 +13,7 @@ import WaresType from "@/views/Wares/WaresType";
 import OrderList from "@/views/Order/OrderList";
 import OrderSetting from "@/views/Order/OrderSetting";
 import Menu from "@/views/System/Menu";
+import CommentList from "@/views/Comment/CommentList";
 
 const Index = () => import('../views/Login')
 
@@ -129,6 +130,14 @@ const routes=[
                             name: '订单设置'
                         },
                         component: OrderSetting
+                    },
+                    {
+                        path: 'commentList',
+                        name: 'CommentList',
+                        meta: {
+                            name: '评论列表'
+                        },
+                        component: CommentList
                     }
                 ]
             }

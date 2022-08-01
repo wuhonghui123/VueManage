@@ -16,7 +16,8 @@
           >
             <el-row>
               <el-col :span='2'>
-                <span class="el-icon-s-custom"></span>
+                <User style="width: 1em; height: 1em; margin-right: 12px"/>
+
               </el-col>
               <el-col :span='22'>
                 <el-input
@@ -33,7 +34,7 @@
           >
             <el-row>
               <el-col :span='2'>
-                <span class="el-icon-lock"></span>
+                <Lock style="width: 1em; height: 1em; margin-right: 12px"/>
               </el-col>
               <el-col :span='22'>
                 <el-input
@@ -64,11 +65,14 @@
 </template>
 
 <script>
-
-
+import { User,Lock } from '@element-plus/icons-vue'
 
 export default {
   name: "LoginPage",
+  components:{
+    User,
+    Lock
+  },
   data(){
     return{
       loginForm:{
@@ -147,11 +151,13 @@ export default {
   color: #fff;
   background-color: transparent;
   font-size: 12px;
+  margin: 0 auto;
 }
 
 .submitBtn {
   background-color: transparent;
   color: #39f;
   width: 200px;
+  margin: 0 auto;
 }
 </style>
