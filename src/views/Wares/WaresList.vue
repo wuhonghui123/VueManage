@@ -2,40 +2,108 @@
   <div class="goods">
     <!-- 搜索区域 -->
     <div class="header">
-      <el-input  v-model="input" placeholder="请输入内容"></el-input>
+      <el-form-item label="类别">
+        <el-select v-model="this.input" placeholder="please select your zone">
+          <el-option label="Zone one" value="shanghai" />
+          <el-option label="Zone two" value="beijing" />
+        </el-select>
+      </el-form-item>
       <el-button type="primary">查询</el-button>
       <el-button type="primary">添加</el-button>
     </div>
     <!-- 表格区域展示视图 -->
-    <div class="wrapper">
-      <el-table
-          :data="foodList"
-          border
-          style="width: 100%">
-        <el-table-column type="selection" width="55"></el-table-column>
-        <el-table-column prop="id" label="商品ID" width="100px"></el-table-column>
-        <el-table-column prop="name" label="商品名称" width="100px"></el-table-column>
-        <el-table-column width="100px" prop="price" label="商品价格"></el-table-column>
-        <el-table-column width="100px"  prop="sale"  label="商品销量"></el-table-column>
-<!--        <el-table-column width="120px"  prop="category"   label="规格类目"></el-table-column>-->
-        <el-table-column  prop="food_img"  label="商品图片"></el-table-column>
-        <el-table-column  prop="like_num"  label="喜欢人数"></el-table-column>
-        <el-table-column prop="desc"  label="商品描述"></el-table-column>
-        <el-table-column label="操作">
-          <template v-slot="scope">
-            <el-button
-                size="mini"
-                @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-            <el-button
-                size="mini"
-                type="danger"
-                @click="handleDelete(scope.$index, scope.row)">删除</el-button>
-          </template>
-        </el-table-column>
-      </el-table>
-    </div>
-    <!-- 分页 -->
+    <table class="userTable">
+      <tr>
+        <th>商品ID</th>
+        <th>商品名称</th>
+        <th>商品价格</th>
+        <th>商品销量</th>
+        <th>商品类别</th>
+        <th>状态</th>
+        <th>商品图片</th>
+        <th>喜欢人数</th>
+        <th>商品描述</th>
+        <th>操作</th>
+
+      </tr>
+      <tr v-for="(food,idx) in foodList" :key="food.id">
+        <td>{{food.id}}</td>
+        <td>{{food.name}}</td>
+        <td>{{food.price}}</td>
+        <td>{{food.sale}}</td>
+        <td>{{food.class_name}}</td>
+        <td>{{food.new_status}}
+          </td>
+        <td>{{food.food_img}}</td>
+        <td>{{food.like_num}}</td>
+        <td>{{food.desc}}</td>
+        <el-button @click="changeUser(idx)">编辑</el-button>
+        <el-button @click="deleteUser(idx)">删除</el-button>
+      </tr>
+    </table>
   </div>
+
+  <!--//修改商品信息界面-->
+  <el-dialog title="修改商品信息！！！" v-model="ChangedialogFormVisible" width="400px">
+    <el-form :model="foodfrom">
+      <el-form-item label="编号:" >
+        <span>{{foodfrom.id}}</span>
+      </el-form-item>
+      <el-form-item label="名称:" >
+        <!--        <input></input>-->
+        <el-input v-model="foodfrom.name" ></el-input>
+      </el-form-item>
+      <el-form-item label="价格:" >
+        <el-input v-model="foodfrom.price"></el-input>
+      </el-form-item>
+        <el-form-item label="类别">
+          <el-select v-model="foodfrom.class_name" placeholder="选择类别">
+            <el-option label="烧烤" value="1" />
+            <el-option label="烤素" value="2" />
+          </el-select>
+        </el-form-item>
+      <el-form-item label="图片:" >
+        <el-input v-model="foodfrom.food_img"></el-input>
+      </el-form-item>
+      <el-form-item label="描述:" >
+        <el-input v-model="foodfrom.desc"></el-input>
+      </el-form-item>
+      <el-form-item label="新品:" >
+        <el-switch active-value=1
+                   inactive-value=0 v-model="foodfrom.new_status" />
+      </el-form-item>
+      <el-form-item label="上架:" >
+        <el-switch active-value=1
+                   inactive-value=0 v-model="foodfrom.publish_status" />
+      </el-form-item>
+      <el-form-item label="推荐:" >
+        <el-switch active-value=1
+                   inactive-value=0 v-model="foodfrom.recommend_status" />
+      </el-form-item>
+    </el-form>
+    <div  class="dialog-footer">
+      <!--      添加函数-->
+      <el-button @click="ChangedialogFormVisible = false">取 消</el-button>
+      <el-button type="primary" @click="updatefood">确 定</el-button>
+    </div>
+  </el-dialog>
+
+  <!--删除商品提示界面-->
+  <el-dialog title="是否删除商品???" v-model="DeletedialogFormVisible" width="360px">
+    <el-form :model="foodfrom">
+      <el-form-item label="编号:">
+        <span>{{foodfrom.id}}</span>
+      </el-form-item>
+      <el-form-item label="名称:">
+        <span>{{foodfrom.name}}</span>
+      </el-form-item>
+    </el-form>
+    <div  class="dialog-footer">
+      <!--      添加函数-->
+      <el-button @click="DeletedialogFormVisible = false">取 消</el-button>
+      <el-button type="primary" @click="deleteFood">确 定</el-button>
+    </div>
+  </el-dialog>
 </template>
 
 
@@ -45,25 +113,122 @@ export default {
   data(){
     return{
       input:'',
-      foodList: []
+      foodList: [
+        {
+          id:'',
+          food_img:'',
+          desc:'',
+          price:'',
+          sale:'',
+          class_name:'',
+          name:'',
+          publish_status:"",
+          recommend_status:"",
+          new_status:"",
+          like_num:''
+        }
+      ],
+      DeleteIdx:'',
+      updateIdx:'',
+      ChangedialogFormVisible: false,
+      DeletedialogFormVisible:false,
+      loading: false,
+      foodfrom:
+        {
+          id:'',
+          food_img:'',
+          desc:'',
+          price:'',
+          class_name:'',
+          name:'',
+          publish_status:'',
+          recommend_status:'',
+          new_status:''
+        },
     }
   },
   mounted() {
       this.$api.food.findFoodlist("food/list")
           .then(res => {
-            this.foodList=res;
-            console.log(res);
+            this.foodList = res;
+            console.log(this.foodList);
           })
           .catch(err => {
             console.log(err);
           })
   },
   methods: {
-    handleEdit(index, row) {
-      console.log(index, row);
+    changeUser(idx){
+      //调用赋值函数.
+      this.updateIdx=idx;
+      this.foodListTofoodFrom(idx);
+      this.ChangedialogFormVisible = true;
+      console.log(this.foodfrom);
     },
-    handleDelete(index, row) {
-      console.log(index, row);
+
+    updatefood(){
+      //进行交互
+      const loading = this.$loading({
+        lock: true,//lock的修改符--默认是false
+        text: '加载中,请等待',//显示在加载图标下方的加载文案
+        spinner: 'el-icon-loading',//自定义加载图标类名
+        background: 'rgba(0, 0, 0, 0.8)',//遮罩层颜色
+        // target: document.querySelector('')//loading覆盖的dom元素节点
+      });
+      this.$api.food.updatefood("/food/update_food",this.foodfrom).then(res=>{
+            console.log(res);
+            setTimeout(() => {
+              loading.close();
+            }, 1000);
+            //可添加修改成功提示窗口
+          }
+      ).catch(err=>{
+        console.log(err);
+        //可添加删除失败提示窗口
+      });
+      this.ChangedialogFormVisible = false;
+    },
+
+    deleteUser(idx){
+      this.foodListTofoodFrom(idx);
+      this.DeleteIdx=idx;
+      this.DeletedialogFormVisible=true;
+    },
+    deleteFood(){
+      const loading = this.$loading({
+        lock: true,//lock的修改符--默认是false
+        text: '加载中,请等待',//显示在加载图标下方的加载文案
+        spinner: 'el-icon-loading',//自定义加载图标类名
+        background: 'rgba(0, 0, 0, 0.8)',//遮罩层颜色
+      });
+      this.$api.food.deletefood("/food/delete_food",this.foodfrom).then(res=>{
+            console.log(res);
+            setTimeout(() => {
+              loading.close();
+            }, 1000);
+            loading.close();
+            this.foodList.splice(this.DeleteIdx,1);
+            alert("删除成功"+res);
+            //可添加修改成功提示窗口
+          }
+      ).catch(err=>{
+        console.log(err);
+        //可添加删除失败提示窗口
+      });
+      this.DeletedialogFormVisible=false;
+    },
+    foodListTofoodFrom(index){
+      var a = String(this.foodList[index].publish_status);
+      var b = String(this.foodList[index].new_status);
+      var c = String(this.foodList[index].recommend_status);
+      this.foodfrom.id=this.foodList[index].id;
+      this.foodfrom.name=this.foodList[index].name;
+      this.foodfrom.food_img=this.foodList[index].food_img;
+      this.foodfrom.price =this.foodList[index].price;
+      this.foodfrom.class_name=this.foodList[index].class_name;
+      this.foodfrom.publish_status=a;
+      this.foodfrom.new_status=b;
+      this.foodfrom.recommend_status=c;
     }
 
   }
@@ -71,5 +236,25 @@ export default {
 </script>
 
 <style scoped>
-
+.userTable{
+  background-color: #ffffff;
+  width:1600px;
+}
+.userTable td,th{
+  /*border: 1px solid beige;*/
+  padding:5px;
+}
+.searchButton{
+  background-color: blanchedalmond;
+  width: 60px;
+  height: 30px;
+  /*border: 2px black solid;*/
+}
+body {
+  margin: 0;
+}
+button{
+  height: 40px;
+  margin-left: 20px;
+}
 </style>

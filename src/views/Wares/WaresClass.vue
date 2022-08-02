@@ -14,7 +14,7 @@
           style="width: 100%">
         <el-table-column type="selection" width="55"></el-table-column>
         <el-table-column prop="id" label="类别ID" width="100px"></el-table-column>
-        <el-table-column prop="name" label="类别名称" width="100px"></el-table-column>
+        <el-table-column prop="class_name" label="类别名称" width="100px"></el-table-column>
         <el-table-column width="100px" prop="icon" label="图标"></el-table-column>
         <el-table-column label="操作">
           <template v-slot="scope">
@@ -33,6 +33,7 @@
   </div>
 </template>
 <script>
+
 export default {
   name: "WaresClass",
   data(){
@@ -54,6 +55,7 @@ export default {
   methods: {
     handleEdit(index, row) {
       console.log(index, row);
+
     },
     handleDelete(index, row) {
       console.log(index, row);
