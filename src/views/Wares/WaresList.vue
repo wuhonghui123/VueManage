@@ -2,13 +2,15 @@
   <div class="goods">
     <!-- 搜索区域 -->
     <div class="header">
-      <el-form-item label="类别">
-        <el-select v-model="this.input" placeholder="please select your zone">
-          <el-option label="Zone one" value="shanghai" />
-          <el-option label="Zone two" value="beijing" />
-        </el-select>
-      </el-form-item>
-      <el-button type="primary">查询</el-button>
+      <el-select v-model="input" placeholder="选择类别">
+        <el-option
+            v-for="item in ClassList"
+            :key="item.id"
+            :label="item.class_name"
+            :value="item.id"
+        />
+      </el-select>
+      <el-button type="primary" @click="findFood">查询</el-button>
       <el-button type="primary">添加</el-button>
     </div>
     <!-- 表格区域展示视图 -->
@@ -20,7 +22,7 @@
         <th>商品销量</th>
         <th>商品类别</th>
         <th>状态</th>
-        <th>商品图片</th>
+        <th width="200px">商品图片</th>
         <th>喜欢人数</th>
         <th>商品描述</th>
         <th>操作</th>
@@ -32,7 +34,10 @@
         <td>{{food.price}}</td>
         <td>{{food.sale}}</td>
         <td>{{food.class_name}}</td>
-        <td>{{food.new_status}}
+        <td>
+          新品<el-switch active-value=1 inactive-value=0 v-model="food.new_status" /><br>
+          上架<el-switch active-value=1 inactive-value=0 v-model="food.publish_status" /><br>
+          推荐<el-switch active-value=1 inactive-value=0 v-model="food.recommend_status" />
           </td>
         <td>{{food.food_img}}</td>
         <td>{{food.like_num}}</td>
@@ -77,8 +82,7 @@
                    inactive-value=0 v-model="foodfrom.publish_status" />
       </el-form-item>
       <el-form-item label="推荐:" >
-        <el-switch active-value=1
-                   inactive-value=0 v-model="foodfrom.recommend_status" />
+        <el-switch active-value=1 inactive-value=0 v-model="foodfrom.recommend_status" />
       </el-form-item>
     </el-form>
     <div  class="dialog-footer">
@@ -113,6 +117,39 @@ export default {
   data(){
     return{
       input:'',
+      ClassList:[{
+          id:'1',
+          class_name:'烧烤'
+        },
+        {
+          id:'2',
+          class_name:'烤素'
+        },
+        {
+          id:'3',
+          class_name:'热销'
+        },
+        {
+          id:'7',
+          class_name:'酒水'
+        },
+        {
+          id:'8',
+          class_name:'主食'
+        },
+        {
+          id:'9',
+          class_name:'炒饭'
+        },
+        {
+          id:'10',
+          class_name:'炒面'
+        },
+        {
+          id:'11',
+          class_name:'新品'
+        }
+        ],
       foodList: [
         {
           id:'',
@@ -151,11 +188,20 @@ export default {
       this.$api.food.findFoodlist("food/list")
           .then(res => {
             this.foodList = res;
-            console.log(this.foodList);
+            // console.log(this.foodList);
           })
           .catch(err => {
             console.log(err);
           })
+    // this.$api.food.findClassList("food/classification_list")
+    //     .then(res => {
+    //       console.log('数据',res);
+    //       this.ClassList = res;
+    //       console.log('菜单类别',this.ClassList);
+    //     })
+    //     .catch(err => {
+    //       console.log(err);
+    //     })
   },
   methods: {
     changeUser(idx){
@@ -163,7 +209,6 @@ export default {
       this.updateIdx=idx;
       this.foodListTofoodFrom(idx);
       this.ChangedialogFormVisible = true;
-      console.log(this.foodfrom);
     },
 
     updatefood(){
@@ -188,7 +233,18 @@ export default {
       });
       this.ChangedialogFormVisible = false;
     },
-
+    findFood(){
+      var url = "food/listtwo?id="+this.input;
+      this.$api.food.findfood(url)
+          .then(res => {
+            this.foodList=[];
+            this.foodList = res;
+            // console.log(this.foodList);
+          })
+          .catch(err => {
+            console.log(err);
+          })
+    },
     deleteUser(idx){
       this.foodListTofoodFrom(idx);
       this.DeleteIdx=idx;
@@ -202,7 +258,7 @@ export default {
         background: 'rgba(0, 0, 0, 0.8)',//遮罩层颜色
       });
       this.$api.food.deletefood("/food/delete_food",this.foodfrom).then(res=>{
-            console.log(res);
+            // console.log(res);
             setTimeout(() => {
               loading.close();
             }, 1000);

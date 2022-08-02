@@ -16,3 +16,6 @@ export function updatefood(url,params){
 export function deletefood(url,params){
     return post(url,params);
 }
+export function findfood(url,params) {
+    return post(url, params);
+}
