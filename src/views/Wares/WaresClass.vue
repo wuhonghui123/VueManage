@@ -1,5 +1,4 @@
 <template>
-
   <div class="goods">
     <!-- 搜索区域 -->
     <div class="header">
@@ -33,11 +32,9 @@
     <!-- 分页 -->
   </div>
 </template>
-
 <script>
 
 export default {
-
   name: "WaresClass",
   data(){
     return{
@@ -67,6 +64,7 @@ export default {
   }
 }
 </script>
+
 
 <style scoped>
 

@@ -13,7 +13,7 @@ import WaresType from "@/views/Wares/WaresType";
 import OrderList from "@/views/Order/OrderList";
 import OrderSetting from "@/views/Order/OrderSetting";
 import Menu from "@/views/System/Menu";
-import OrderDetails from "@/views/Order/OrderDetails";
+import CommentList from "@/views/Comment/CommentList";
 
 const Index = () => import('../views/Login')
 
@@ -124,20 +124,20 @@ const routes=[
                         component: OrderList
                     },
                     {
-                        path: 'orderDetails',
-                        name: 'OrderDetails',
-                        meta: {
-                            name: '订单详情'
-                        },
-                        component: OrderDetails
-                    },
-                    {
                         path: 'orderSetting',
                         name: 'OrderSetting',
                         meta: {
                             name: '订单设置'
                         },
                         component: OrderSetting
+                    },
+                    {
+                        path: 'commentList',
+                        name: 'CommentList',
+                        meta: {
+                            name: '评论列表'
+                        },
+                        component: CommentList
                     }
                 ]
             }
