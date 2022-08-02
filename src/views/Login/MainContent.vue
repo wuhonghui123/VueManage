@@ -14,7 +14,7 @@ export default {
 .main{
   width: 85%;
   height: 90%;
-  background-color: #73b3c5;
+  background-color: darksalmon;
   float: left;
 }
 </style>
