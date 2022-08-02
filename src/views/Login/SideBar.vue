@@ -61,7 +61,7 @@ export default {
 .sidebar {
   width: 15%;
   height: 90%;
-  background-color: #047ace;
+  background-color: chartreuse;
   float: left;
 }
 
@@ -82,7 +82,7 @@ a {
   display: block;
   width: 189px;
   height: 36px;
-  color: #ffffff;
+  color: #5d5d5d;
   text-decoration: none;
   line-height: 36px;
 }

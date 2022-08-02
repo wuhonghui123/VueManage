@@ -14,6 +14,6 @@ export default {
 .header{
   width: 100%;
   height: 10%;
-  background-color: #00b2d2;
+  background-color: deeppink;
 }
 </style>

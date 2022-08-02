@@ -1,4 +1,5 @@
 <template>
+
   <div class="goods">
     <!-- 搜索区域 -->
     <div class="header">
@@ -108,8 +109,8 @@
       <el-button type="primary" @click="deleteFood">确 定</el-button>
     </div>
   </el-dialog>
-</template>
 
+</template>
 
 <script>
 export default {
@@ -292,6 +293,7 @@ export default {
 </script>
 
 <style scoped>
+
 .userTable{
   background-color: #ffffff;
   width:1600px;
