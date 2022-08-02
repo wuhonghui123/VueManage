@@ -47,20 +47,34 @@
       </div>
 <div style="background-color: red">
   <div style="background-color: white;height: 70%" Class="tab">
-    <el-table :data="OrderList" border style="width: 100%">
+    <el-table  :data="OrderList.slice((currentPage-1)*pagesize,currentPage*pagesize)"
+               :stripe="stripe"
+
+               border style="width: 100%">
       <el-table-column type="selection" width="55" />
       <el-table-column prop="id" label="订单编号"/>
       <el-table-column prop="create_time" label="提交时间" />
       <el-table-column prop="user_id" label="用户账号"/>
       <el-table-column prop="order_price" label="订单金额"/>
       <el-table-column prop="pay_type" label="支付方式"/>
-      <el-table-column prop="user_id" label="订单状态"/>
+      <el-table-column prop="order_type" label="订单状态"/>
       <el-table-column label="操作">
         <router-link to="/index/mainContent/orderDetails"><el-button size="small" @click="search">查看订单</el-button></router-link>
-        <el-button size="small" type="danger" style="margin-left: 10px">删除订单</el-button>
+          <el-button size="small" type="danger" style="margin-left: 10px" @click="dele($event)">删除订单</el-button>
       </el-table-column>
     </el-table>
-  </div>
+    <div>
+      <el-button type="primary" style="background-color: RGB(64,158,255); margin-top: 20px">批量删除</el-button>
+      <span style="margin-left: 70%">共{{OrderList.length}}条</span>
+      <el-pagination
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :page-size="pagesize"
+          layout="prev, pager, next"
+          :total="OrderList.length"
+          style="margin:-35px 0 0 80%;width: 15%"/>
+    </div>
+    </div>
 </div>
 
 </div>
@@ -82,7 +96,10 @@ export default {
         time:null
       }
       ),
-      id1:'1'
+      id1:'1',
+      stripe:true,//是否为斑马纹 table
+      currentPage:1,
+      pagesize:5
     }
 
   },
@@ -107,6 +124,20 @@ export default {
             console.log("订单信息：", res);
             this.$store.commit("setOrderList",res)
           })
+    },
+    dele(s){
+      var id=s.target.parentNode.parentNode.parentNode.parentNode.children[1].textContent
+      this.$api.orderList.selectOrderList("order/delete",{'id':id})
+          .then(res=>{
+            console.log("订单信息：", res);
+            this.$store.commit("setOrderList",res)
+          })
+    },
+    handleSizeChange(val) {
+      this.pagesize=val;
+    },
+    handleCurrentChange(val) {
+      this.currentPage = val;
     }
   }
 }
