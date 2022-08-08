@@ -14,13 +14,23 @@
             :label="item.class_name"
             :value="item.id"
         />
-<!--        <el-option label="烧烤" value="1"/>-->
-<!--        <el-option label="烤素" value="2"/>-->
+        <!--        <el-option label="烧烤" value="1"/>-->
+        <!--        <el-option label="烤素" value="2"/>-->
       </el-select>
     </el-form-item>
-    <el-form-item label="图片">
-      <el-input v-model="this.from.food_img"/>
-    </el-form-item>
+      <el-form-item label="图片"  prop="image">
+        <el-upload
+            class="avatar-uploader"
+            :action="this.uploadUrl"
+            :data="this.fromup"
+            :show-file-list="false"
+            :on-success="handleUpImage"
+            :before-upload="beforeImageUpload"
+        >
+          <el-image v-if="this.from.food_img" :src="this.from.food_img" class="avatar" />
+          <el-icon v-else class="avatar-uploader-icon">+</el-icon>
+        </el-upload>
+      </el-form-item>
     <el-form-item label="上架状态">
       <el-switch active-value=1
                  inactive-value=0 v-model="this.from.publish_status"/>
@@ -43,14 +53,16 @@
   </el-form>
 </template>
 <script>
+import {ElMessage} from "element-plus";
+
 export default {
   name: "WaresAdd",
   data() {
     return {
       ClassList: [
         {
-        id: '1',
-        class_name: '烧烤'
+          id: '1',
+          class_name: '烧烤'
         },
         {
           id: '2',
@@ -81,6 +93,7 @@ export default {
           class_name: '新品'
         }
       ],
+      uploadUrl: 'https://www.imgurl.org/api/v2/upload',
       from: {
         name: '',
         price: '',
@@ -89,7 +102,12 @@ export default {
         recommend_status: '1',
         new_status: '0',
         desc: '',
-        food_img: ''
+        food_img: '',
+        image:''
+      },
+      fromup:{
+        uid:'373a616dd3f76daa844907d0d1e0d551',
+        token:'ec8037840340973db13559825482ad7b'
       }
     }
 
@@ -106,15 +124,48 @@ export default {
           .catch(err => {
             console.log(err);
           })
-    }
-
+    },
+    beforeImageUpload(rawFile){
+      if(rawFile.size / 1024 / 1024 > 10){
+        ElMessage.error("单张图片大小不能超过10MB!");
+        return false;
+      }
+      return true;
+    },
+    handleUpImage(res){
+      console.log(res);
+      this.from.food_img = res.data.url;
+    },
   }
-
-
 }
 
 </script>
 
 <style scoped>
+.avatar-uploader .avatar {
+  width: 178px;
+  height: 178px;
+  display: block;
+}
 
+.avatar-uploader .el-upload {
+  border: 1px dashed var(--el-border-color);
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: var(--el-transition-duration-fast);
+}
+
+.avatar-uploader .el-upload:hover {
+  border-color: var(--el-color-primary);
+}
+
+.el-icon.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 178px;
+  height: 178px;
+  text-align: center;
+}
 </style>

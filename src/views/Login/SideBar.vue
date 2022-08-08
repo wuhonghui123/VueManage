@@ -47,7 +47,7 @@ export default {
     //   }
     // }
     test(event) {
-      if (event.target.parentNode.lastChild.className=="submenuHide"){
+      if (event.target.parentNode.lastChild.className==="submenuHide"){
         event.target.parentNode.lastChild.className="submenuShow"
       }else {
         event.target.parentNode.lastChild.className="submenuHide"

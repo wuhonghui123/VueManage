@@ -55,6 +55,7 @@ export default {
   methods: {
     handleEdit(index, row) {
       console.log(index, row);
+      console.log(row.id);
 
     },
     handleDelete(index, row) {
