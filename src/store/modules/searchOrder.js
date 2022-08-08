@@ -3,7 +3,8 @@ export default {
     state: {
         // 全局属性
         // 如果没有模块化，很多模块的属性，都在这里声明
-        SearchOrder: []
+        SearchOrder: [],
+        OrderUserList:[]
     },
     // 同步操作赋值
     mutations: {
@@ -11,6 +12,10 @@ export default {
         setSearchOrder(state, SearchOrder) {
             state.SearchOrder = SearchOrder;
             console.log("给SearchOrder赋值：", SearchOrder)
+        },
+        setOrderUserList(state, OrderUserList) {
+            state.OrderUserList = OrderUserList;
+            console.log("给OrderUserList赋值：", OrderUserList)
         }
     },
     actions: {
@@ -22,6 +27,9 @@ export default {
     getters: {
         getSearchOrder(state) {
             return state.SearchOrder
+        },
+        getOrderUserList(state) {
+            return state.OrderUserList
         }
     }
 }
