@@ -1,5 +1,6 @@
 import Login from "@/views/Login/Login";
 // import Index from "@/views/index"
+import UserList from "@/views/System/UserList"
 import {createRouter, createWebHistory} from "vue-router";
 import User from "@/views/System/User";
 import Role from "@/views/System/Role";
@@ -83,6 +84,15 @@ const routes=[
                             name: '管理员'
                         },
                         component: Admin
+                    },
+
+                    {
+                        path: 'userlist',
+                        name: 'UserList',
+                        meta: {
+                        name: '用户列表'
+                    },
+                    component: UserList
                     },
                     {
                         path: 'waresList',

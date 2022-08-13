@@ -35,6 +35,7 @@ instance.interceptors.response.use(
 
 
 export function get(url, params) {
+    console.log(params);
     return instance.get(url, {params});
 }
 

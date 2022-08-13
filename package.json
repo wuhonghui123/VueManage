@@ -11,7 +11,7 @@
     "@element-plus/icons-vue": "^2.0.6",
     "axios": "^0.27.2",
     "core-js": "^3.8.3",
-    "element-plus": "^2.2.11",
+    "element-plus": "^2.2.12",
     "font-awesome": "^4.7.0",
     "qs": "^6.11.0",
     "vform3-builds": "^3.0.8",
