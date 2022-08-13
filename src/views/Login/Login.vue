@@ -98,6 +98,9 @@ export default {
         console.log(err);
         this.$router.push("/")
       })
+      this.$api.orderList.getOrderList("order/list").then(res=>{
+        this.$store.commit("setOrderList",res)
+      })
   }
 }
 }

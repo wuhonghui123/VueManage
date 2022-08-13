@@ -57,5 +57,7 @@ export default {
 ::v-deep .el-table th,
 ::v-deep .el-table td{
   text-align: center !important;
+  border:1px solid #dee8f1;
+
 }
 </style>
