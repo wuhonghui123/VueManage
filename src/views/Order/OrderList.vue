@@ -68,7 +68,7 @@
 
               <el-button v-if="scope.row.order_type=='待付款'" size="small" type="danger" style="margin-left: 10px" @click="dele($event)">删除订单</el-button>
               <el-button v-else-if="scope.row.order_type=='待发货'" size="small" style="margin-left: 10px" @click="shipped($event)">订单发货</el-button>
-              <el-button v-else size="small" style="margin-left: 10px" @click="dele($event)">订单跟踪</el-button>
+              <el-button v-else size="small" style="margin-left: 10px">订单跟踪</el-button>
             </template>
 
           </el-table-column>
@@ -111,7 +111,8 @@ export default {
       stripe:true,//是否为斑马纹 table
       currentPage:1,
       pagesize:5,
-      multipleSelection:[]
+      multipleSelection:[],
+      LogisticsDialog:false
     }
   },
   computed: {
@@ -124,13 +125,16 @@ export default {
     search(s){
       var order_id=s.target.parentNode.parentNode.parentNode.parentNode.parentNode.children[1].textContent
       var user_id=s.target.parentNode.parentNode.parentNode.parentNode.parentNode.children[3].textContent
+      var order_type=s.target.parentNode.parentNode.parentNode.parentNode.parentNode.children[6].textContent
       this.$api.searchOrder.getOrderList("order/search",{'order_id':order_id})
           .then(res=>{
             console.log("订单详情：", res);
-            this.$store.commit("setSearchOrder",res)
+            this.$store.commit("setSearchOrder",res);
+            this.$store.commit("setOrderType",order_type)
           })
-      this.$api.searchOrder.getUserOrderList("order/user",{'order_id':order_id,'user_id':user_id})
+      this.$api.orderList.getUserOrderList("order/user",{'order_id':order_id,'user_id':user_id})
       .then(res=>{
+        console.log("test",res);
         this.$store.commit("setOrderUserList",res)
       })
     },
@@ -152,7 +156,8 @@ export default {
     shipped(e){
       var order_id=e.target.parentNode.parentNode.parentNode.parentNode.children[1].textContent
       var user_id=e.target.parentNode.parentNode.parentNode.parentNode.children[3].textContent
-      this.$api.searchOrder.getUserOrderList("order/user",{'order_id':order_id,'user_id':user_id})
+      console.log("######",order_id,user_id);
+      this.$api.searchOrder.getUserOrderList("order/user",{'id':order_id,'user_id':user_id})
           .then(res=>{
             this.$store.commit("setOrderUserList",res)
           })

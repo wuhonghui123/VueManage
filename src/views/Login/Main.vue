@@ -6,21 +6,21 @@
           <div class="total-frame">
             <img src="../../assets/orderNum.png" class="total-icon">
             <div class="total-title">今日订单总数</div>
-            <div class="total-value">200</div>
+            <div class="total-value">7</div>
           </div>
         </el-col>
         <el-col :span="6">
           <div class="total-frame">
             <img src="../../assets/today.png" class="total-icon">
             <div class="total-title">今日销售总额</div>
-            <div class="total-value">￥5000.00</div>
+            <div class="total-value">￥132.00</div>
           </div>
         </el-col>
         <el-col :span="6">
           <div class="total-frame">
             <img src="../../assets/history.png" class="total-icon">
             <div class="total-title">昨日销售总额</div>
-            <div class="total-value">￥5000.00</div>
+            <div class="total-value">￥1498.00</div>
           </div>
         </el-col>
         <el-col :span="6">
@@ -39,7 +39,7 @@
           <el-col :span="8">
             <div class="un-handle-item">
               <span class="font-medium">待付款订单</span>
-              <span style="float: right" class="color-danger">(10)</span>
+              <span style="float: right" class="color-danger">(7)</span>
             </div>
           </el-col>
           <el-col :span="8">
@@ -51,7 +51,7 @@
           <el-col :span="8">
             <div class="un-handle-item">
               <span class="font-medium">待确认收货订单</span>
-              <span style="float: right" class="color-danger">(10)</span>
+              <span style="float: right" class="color-danger">(3)</span>
             </div>
           </el-col>
         </el-row>
@@ -59,19 +59,19 @@
           <el-col :span="8">
             <div class="un-handle-item">
               <span class="font-medium">待发货订单</span>
-              <span style="float: right" class="color-danger">(10)</span>
+              <span style="float: right" class="color-danger">(5)</span>
             </div>
           </el-col>
           <el-col :span="8">
             <div class="un-handle-item">
               <span class="font-medium">已发货订单</span>
-              <span style="float: right" class="color-danger">(10)</span>
+              <span style="float: right" class="color-danger">(2)</span>
             </div>
           </el-col>
           <el-col :span="8">
             <div class="un-handle-item">
               <span class="font-medium">待评价订单</span>
-              <span style="float: right" class="color-danger">(10)</span>
+              <span style="float: right" class="color-danger">(6)</span>
             </div>
           </el-col>
         </el-row>
@@ -84,7 +84,7 @@
           <div style="padding: 20px">
             <div>
               <div style="color: #909399;font-size: 14px">本月订单总数</div>
-              <div style="color: #606266;font-size: 24px;padding: 10px 0">10000</div>
+              <div style="color: #606266;font-size: 24px;padding: 10px 0">128</div>
               <div>
                 <span class="color-success" style="font-size: 14px">+10%</span>
                 <span style="color: #C0C4CC;font-size: 14px">同比上月</span>
@@ -92,7 +92,7 @@
             </div>
             <div style="margin-top: 20px;">
               <div style="color: #909399;font-size: 14px">本周订单总数</div>
-              <div style="color: #606266;font-size: 24px;padding: 10px 0">1000</div>
+              <div style="color: #606266;font-size: 24px;padding: 10px 0">47</div>
               <div>
                 <span class="color-danger" style="font-size: 14px">-10%</span>
                 <span style="color: #C0C4CC;font-size: 14px">同比上周</span>
@@ -100,7 +100,7 @@
             </div>
             <div style="margin-top: 20px;">
               <div style="color: #909399;font-size: 14px">本月销售总额</div>
-              <div style="color: #606266;font-size: 24px;padding: 10px 0">100000</div>
+              <div style="color: #606266;font-size: 24px;padding: 10px 0">12307</div>
               <div>
                 <span class="color-success" style="font-size: 14px">+10%</span>
                 <span style="color: #C0C4CC;font-size: 14px">同比上月</span>
@@ -108,7 +108,7 @@
             </div>
             <div style="margin-top: 20px;">
               <div style="color: #909399;font-size: 14px">本周销售总额</div>
-              <div style="color: #606266;font-size: 24px;padding: 10px 0">50000</div>
+              <div style="color: #606266;font-size: 24px;padding: 10px 0">4885</div>
               <div>
                 <span class="color-danger" style="font-size: 14px">-10%</span>
                 <span style="color: #C0C4CC;font-size: 14px">同比上周</span>

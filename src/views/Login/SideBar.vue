@@ -8,7 +8,7 @@
 
         <ul :class="submenu" v-if="menu.children.length>0">
           <li v-for="childMenu in menu.children" :key="childMenu.id">
-            <router-link :to="childMenu.url" :class=childMenu.icon>{{ childMenu.name }}</router-link>
+            <router-link :to="childMenu.url" :class=childMenu.icon @click="getOrderList(childMenu.name)">{{ childMenu.name }}</router-link>
           </li>
         </ul>
       </li>
@@ -50,6 +50,13 @@ export default {
         event.target.parentNode.lastChild.className="submenuShow"
       }else {
         event.target.parentNode.lastChild.className="submenuHide"
+      }
+    },
+    getOrderList(name){
+      if(name=="订单列表"){
+        this.$api.orderList.getOrderList("order/list").then(res=>{
+          this.$store.commit("setOrderList",res)
+        })
       }
     }
   }
