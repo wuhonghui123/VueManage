@@ -16,8 +16,6 @@
   </div>
 </template>
 <script>
-
-
 export default {
   name: "SideBar",
   data() {
@@ -33,6 +31,7 @@ export default {
       let tree = this.$store.getters.getNavTree;
       return tree;
     }
+
   },
   methods: {
     // test() {
@@ -61,7 +60,7 @@ export default {
 .sidebar {
   width: 15%;
   height: 90%;
-  background-color: #047ace;
+  background-color: #54595d;
   float: left;
 }
 

@@ -39,7 +39,9 @@
           上架<el-switch active-value=1 inactive-value=0 v-model="food.publish_status" /><br>
           推荐<el-switch active-value=1 inactive-value=0 v-model="food.recommend_status" />
           </td>
-        <td>{{food.food_img}}</td>
+        <td>
+<!--          {{food.food_img}}-->
+          <el-image :src="food.food_img" /></td>
         <td>{{food.like_num}}</td>
         <td>{{food.desc}}</td>
         <el-button @click="changeUser(idx)">编辑</el-button>
@@ -49,7 +51,7 @@
   </div>
 
   <!--//修改商品信息界面-->
-  <el-dialog title="修改商品信息！！！" v-model="ChangedialogFormVisible" width="400px">
+  <el-dialog title="修改商品信息！！！" v-model="ChangedialogFormVisible" width="800px" >
     <el-form :model="foodfrom">
       <el-form-item label="编号:" >
         <span>{{foodfrom.id}}</span>
@@ -67,8 +69,18 @@
             <el-option label="烤素" value="2" />
           </el-select>
         </el-form-item>
-      <el-form-item label="图片:" >
-        <el-input v-model="foodfrom.food_img"></el-input>
+      <el-form-item label="图片"  prop="image" style="height: 300px;width: 300px">
+        <el-upload
+            class="avatar-uploader"
+            :action="this.uploadUrl"
+            :data="this.fromup"
+            :show-file-list="false"
+            :on-success="handleUpImage"
+            :before-upload="beforeImageUpload"
+        >
+          <el-image v-if="foodfrom.food_img" :src="foodfrom.food_img" class="avatar" />
+          <el-icon v-else class="avatar-uploader-icon">+</el-icon>
+        </el-upload>
       </el-form-item>
       <el-form-item label="描述:" >
         <el-input v-model="foodfrom.desc"></el-input>
@@ -112,6 +124,8 @@
 
 
 <script>
+import {ElMessage} from "element-plus";
+
 export default {
   name: "WaresList",
   data(){
@@ -182,6 +196,11 @@ export default {
           recommend_status:'',
           new_status:''
         },
+      uploadUrl: 'https://www.imgurl.org/api/v2/upload',
+      fromup:{
+        uid:'373a616dd3f76daa844907d0d1e0d551',
+        token:'ec8037840340973db13559825482ad7b'
+      }
     }
   },
   mounted() {
@@ -211,6 +230,17 @@ export default {
       this.ChangedialogFormVisible = true;
     },
 
+    beforeImageUpload(rawFile){
+      if(rawFile.size / 1024 / 1024 > 10){
+        ElMessage.error("单张图片大小不能超过10MB!");
+        return false;
+      }
+      return true;
+    },
+    handleUpImage(res){
+      console.log(res);
+      this.foodfrom.food_img = res.data.url;
+    },
     updatefood(){
       //进行交互
       const loading = this.$loading({

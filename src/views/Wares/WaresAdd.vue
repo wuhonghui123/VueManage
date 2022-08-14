@@ -1,4 +1,5 @@
 <template>
+  <div class="addfood">
   <el-form :model="this.from" label-width="120px">
     <el-form-item label="菜名">
       <el-input v-model="this.from.name"/>
@@ -28,7 +29,7 @@
             :before-upload="beforeImageUpload"
         >
           <el-image v-if="this.from.food_img" :src="this.from.food_img" class="avatar" />
-          <el-icon v-else class="avatar-uploader-icon">+</el-icon>
+          <el-icon v-else class="avatar-uploader-icon">添加图片</el-icon>
         </el-upload>
       </el-form-item>
     <el-form-item label="上架状态">
@@ -51,6 +52,7 @@
       <el-button>Cancel</el-button>
     </el-form-item>
   </el-form>
+  </div>
 </template>
 <script>
 import {ElMessage} from "element-plus";
@@ -167,5 +169,10 @@ export default {
   width: 178px;
   height: 178px;
   text-align: center;
+}
+.addfood{
+  background-color: #ffffff;
+  width: 1200px;
+  height: 700px;
 }
 </style>
