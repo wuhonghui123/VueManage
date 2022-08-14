@@ -5,6 +5,7 @@ import * as user from "@/http/modules/user"
 import * as food from "@/http/modules/food";
 import * as orderList from "@/http/modules/orderList"
 import * as searchOrder from "@/http/modules/searchOrder"
+import * as commend from '@/http/modules/commend'
 
 
 export default {
@@ -14,5 +15,6 @@ export default {
     user,
     food,
     orderList,
-    searchOrder
+    searchOrder,
+    commend
 }

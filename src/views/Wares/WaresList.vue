@@ -212,15 +212,6 @@ export default {
           .catch(err => {
             console.log(err);
           })
-    // this.$api.food.findClassList("food/classification_list")
-    //     .then(res => {
-    //       console.log('数据',res);
-    //       this.ClassList = res;
-    //       console.log('菜单类别',this.ClassList);
-    //     })
-    //     .catch(err => {
-    //       console.log(err);
-    //     })
   },
   methods: {
     changeUser(idx){
