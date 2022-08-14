@@ -6,3 +6,6 @@ export function getOrderList(url){
 export function selectOrderList(url,params){
     return get(url,params);
 }
+export function getUserOrderList(url,params){
+    return get(url,params);
+}

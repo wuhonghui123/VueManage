@@ -11,7 +11,11 @@ export default {
         setOrderList(state, OrderList) {
             state.OrderList = OrderList;
             console.log("给OrderList赋值：", OrderList)
-        }
+        },
+    setOrderUserList(state, OrderUserList) {
+        state.OrderUserList = OrderUserList;
+        console.log("给OrderUserList赋值：", OrderUserList)
+    }
     },
     actions: {
         /*
@@ -23,6 +27,9 @@ export default {
         getOrderList(state) {
             return state.OrderList
         },
+        getOrderUserList(state) {
+            return state.OrderUserList
+        }
 
 
     }
